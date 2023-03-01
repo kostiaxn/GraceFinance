@@ -13,5 +13,30 @@ public class Expense extends Transaction {
         this.productSubCategory = productSubCategory;
         this.productName = productName;
     }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public String getProductSubCategory() {
+        return productSubCategory;
+    }
+
+    public void setProductSubCategory(String productSubCategory) {
+        this.productSubCategory = productSubCategory;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
 }
 
