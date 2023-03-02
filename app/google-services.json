@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "931771397676",
+    "firebase_url": "https://grace-finance-9cb44-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "grace-finance-9cb44",
+    "storage_bucket": "grace-finance-9cb44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931771397676:android:b15aa49c83a85ddbacc389",
+        "android_client_info": {
+          "package_name": "com.kostiaxn.alfaparser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931771397676-btjhk8u2qb9lh8bjt4mmps09nu6q65hs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHOa7XeIjFhJl_eDp-GdV6SXjqiyPyw_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931771397676-btjhk8u2qb9lh8bjt4mmps09nu6q65hs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931771397676:android:5f9a8fd7139d31deacc389",
+        "android_client_info": {
+          "package_name": "com.kostiaxn.gracefinance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931771397676-5utlresf17kv7m85l8gb928236sjfid8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kostiaxn.gracefinance",
+            "certificate_hash": "72e1c4806a7070ae3c8ed3512a72a80866add0ca"
+          }
+        },
+        {
+          "client_id": "931771397676-btjhk8u2qb9lh8bjt4mmps09nu6q65hs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHOa7XeIjFhJl_eDp-GdV6SXjqiyPyw_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "931771397676-btjhk8u2qb9lh8bjt4mmps09nu6q65hs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

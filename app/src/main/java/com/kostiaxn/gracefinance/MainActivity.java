@@ -11,22 +11,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnLogOut;
+    Button btnLogOut, btnAddExpense;
     FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        btnAddExpense = findViewById(R.id.btnAddExpense);
         btnLogOut = findViewById(R.id.btnLogout);
+
         mAuth = FirebaseAuth.getInstance();
 
         btnLogOut.setOnClickListener(view ->{
             mAuth.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
-
+        btnAddExpense.setOnClickListener(view ->{
+            startActivity(new Intent(MainActivity.this, AddExpenseActivity.class));
+        });
     }
 
     @Override
