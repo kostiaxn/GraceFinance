@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import android.widget.EditText;
-
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,28 +20,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kostiaxn.gracefinance.model.Expense;
+import com.kostiaxn.gracefinance.model.Income;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AddExpenseActivity extends AppCompatActivity {
-    private Button datePickerButton, expenseSaveButton;
-    private EditText etAccountName, etCardName, etProductCategory, etSubProductCategory, etProductName, etAmount, etPlace, etComment, etCurrency;
+public class AddIncomeActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    private Button datePickerButton, incomeSaveButton;
+    private EditText etAccountName, etCardName, etIncomeCategory, etIncomeSubCategory, etAmount, etPlace, etComment, etCurrency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_expense);
-
+        setContentView(R.layout.activity_add_income);
         datePickerButton = findViewById(R.id.date_picker_button);
-        expenseSaveButton = findViewById(R.id.btnSaveExpense);
+        incomeSaveButton = findViewById(R.id.btnSaveIncome);
         etAccountName = findViewById(R.id.etAccountName);
         etCardName = findViewById(R.id.etCardName);
-        etProductCategory = findViewById(R.id.etProductCategory);
-        etSubProductCategory = findViewById(R.id.etSubProductCategory);
-        etProductName = findViewById(R.id.etProductName);
+        etIncomeCategory = findViewById(R.id.etIncomeCategory);
+        etIncomeSubCategory = findViewById(R.id.etIncomeSubCategory);
         etAmount = findViewById(R.id.etAmount);
         etPlace = findViewById(R.id.etPlace);
         etComment = findViewById(R.id.etComment);
@@ -56,7 +54,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 showDatePicker();
             }
         });
-        expenseSaveButton.setOnClickListener(new View.OnClickListener() {
+        incomeSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveExpenseInFirebase();
@@ -88,7 +86,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     private void saveExpenseInFirebase() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
-        DatabaseReference myRef = database.getReference("users/" + userId + "/transactions/expenses");
+        DatabaseReference myRef = database.getReference("users/" + userId + "/transactions/incomes");
 
         // Retrieve the current ID from Firebase
         DatabaseReference idRef = myRef.child("current_id");
@@ -109,25 +107,25 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String comment = etComment.getText().toString().trim();
                 String currency = etCurrency.getText().toString().trim();
                 double exchangeRate = 1; // Create variable in User class
-                String productCategory = etProductCategory.getText().toString().trim();
-                String productSubCategory = etSubProductCategory.getText().toString().trim();
-                String productName = etProductName.getText().toString().trim();
+                String incomeCategory = etIncomeCategory.getText().toString().trim();
+                String incomeSubCategory = etIncomeSubCategory.getText().toString().trim();
+
 
 
                 // Create a new expense object with the current ID
-                Expense expense = new Expense(Math.toIntExact(currentId), accountName, cardName, amount, place, comment, currency,
-                        exchangeRate, productCategory, productSubCategory, productName);
+                Income income = new Income(Math.toIntExact(currentId), accountName, cardName, amount, place, comment, currency,
+                        exchangeRate, incomeCategory, incomeSubCategory);
 
                 // Save the expense object to Firebase
-                DatabaseReference expenseRef = myRef.child(String.valueOf(currentId));
-                expenseRef.setValue(expense);
+                DatabaseReference incomeRef = myRef.child(String.valueOf(currentId));
+                incomeRef.setValue(income);
 
                 // Increment the current ID and save it to Firebase
                 long newId = currentId + 1;
                 idRef.setValue(newId);
 
-                Toast.makeText(AddExpenseActivity.this,"Новый расход записан",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AddExpenseActivity.this, MainActivity.class));
+                Toast.makeText(AddIncomeActivity.this,"Новое поступление добавлено",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AddIncomeActivity.this, MainActivity.class));
 
                 // Update the user's balance in Firebase
                 DatabaseReference balanceRef = database.getReference("users/" + userId + "/balance");
@@ -141,9 +139,10 @@ public class AddExpenseActivity extends AppCompatActivity {
                             currentBalance = 0.0;
                         }
 
-                        // Calculate the new balance based on the expense amount and exchange rate
-                        double expenseAmount = expense.getAmount() * expense.getExchangeRate();
-                        double newBalance = currentBalance - expenseAmount;
+                        // Calculate the new balance based on the income amount and exchange rate
+
+//                        double expenseAmount = expense.getAmount() * expense.getExchangeRate();
+                        double newBalance = currentBalance + income.getAmount();
 
                         // Save the new balance to Firebase
                         balanceRef.setValue(newBalance);
@@ -166,3 +165,4 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     }
 }
+

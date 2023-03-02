@@ -12,6 +12,9 @@
         android:theme="@style/Theme.GraceFinance"
         tools:targetApi="31">
         <activity
+            android:name=".AddIncomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddExpenseActivity"
             android:exported="false" />
         <activity
