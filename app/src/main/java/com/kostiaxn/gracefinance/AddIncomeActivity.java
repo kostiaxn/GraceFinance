@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.kostiaxn.gracefinance.model.Expense;
 import com.kostiaxn.gracefinance.model.Income;
 
 import java.text.SimpleDateFormat;
@@ -100,6 +99,7 @@ public class AddIncomeActivity extends AppCompatActivity {
                     currentId = 1L;
                     idRef.setValue(currentId);
                 }
+                String date = datePickerButton.getText().toString().trim();
                 String accountName = etAccountName.getText().toString().trim();
                 String cardName = etCardName.getText().toString().trim();
                 double amount = Double.parseDouble(etAmount.getText().toString().trim());
@@ -111,42 +111,40 @@ public class AddIncomeActivity extends AppCompatActivity {
                 String incomeSubCategory = etIncomeSubCategory.getText().toString().trim();
 
 
-
-                // Create a new expense object with the current ID
-                Income income = new Income(Math.toIntExact(currentId), accountName, cardName, amount, place, comment, currency,
+                // Создание нового объекта Income с текущим ID
+                Income income = new Income(Math.toIntExact(currentId), date, accountName, cardName, amount, place, comment, currency,
                         exchangeRate, incomeCategory, incomeSubCategory);
 
-                // Save the expense object to Firebase
+                // Сохранение объекта Income в Firebase
                 DatabaseReference incomeRef = myRef.child(String.valueOf(currentId));
                 incomeRef.setValue(income);
 
-                // Increment the current ID and save it to Firebase
+                // Инкрементация текущего ID и сохранение его в firebase
                 long newId = currentId + 1;
                 idRef.setValue(newId);
 
 
-
-                // Update the user's balance in Firebase
+                // Обновление баланса юзера в Firebase
                 DatabaseReference balanceRef = database.getReference("users/" + userId + "/balance");
                 balanceRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Double currentBalance = snapshot.getValue(Double.class);
 
-                        // Check if the current balance exists
+                        // Проверка, существует ли баланс
                         if (currentBalance == null) {
                             currentBalance = 0.0;
                         }
 
-                        // Calculate the new balance based on the income amount and exchange rate
+                        // новый баланс на основе суммы дохода и обменного курса
 
 //                        double expenseAmount = expense.getAmount() * expense.getExchangeRate();
                         double newBalance = currentBalance + income.getAmount();
 
-                        // Save the new balance to Firebase
+                        // Сохранение нового баланса в Firebase
                         balanceRef.setValue(newBalance);
 
-                        Toast.makeText(AddIncomeActivity.this,"Новое поступление добавлено",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddIncomeActivity.this, "Новое поступление добавлено", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(AddIncomeActivity.this, MainActivity.class));
                     }
 

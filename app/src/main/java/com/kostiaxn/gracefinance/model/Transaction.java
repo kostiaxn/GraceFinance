@@ -2,6 +2,7 @@ package com.kostiaxn.gracefinance.model;
 
 abstract public class Transaction {
     private int id;
+    private String date;
     private String accountName;
     private String cardName;
     private double amount;
@@ -10,8 +11,9 @@ abstract public class Transaction {
     private String currency;
     private double exchangeRate;
 
-    public Transaction(int id, String accountName, String cardName, double amount, String place, String comment, String currency, double exchangeRate) {
+    public Transaction(int id, String date, String accountName, String cardName, double amount, String place, String comment, String currency, double exchangeRate) {
         this.id = id;
+        this.date = date;
         this.accountName = accountName;
         this.cardName = cardName;
         this.amount = amount;
@@ -27,6 +29,14 @@ abstract public class Transaction {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String id) {
+        this.date = date;
     }
 
     public String getAccountName() {

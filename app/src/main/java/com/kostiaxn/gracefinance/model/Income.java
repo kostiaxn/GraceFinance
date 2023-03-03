@@ -4,8 +4,8 @@ public class Income extends Transaction{
     private String incomeCategory;
     private String incomeSubcategory;
 
-    public Income(int id, String accountName, String cardName, double amount, String place, String comment, String currency, double exchangeRate, String incomeCategory, String incomeSubcategory) {
-        super(id, accountName, cardName, amount, place, comment, currency, exchangeRate);
+    public Income(int id, String date,String accountName, String cardName, double amount, String place, String comment, String currency, double exchangeRate, String incomeCategory, String incomeSubcategory) {
+        super(id, date, accountName, cardName, amount, place, comment, currency, exchangeRate);
         this.incomeCategory = incomeCategory;
         this.incomeSubcategory = incomeSubcategory;
     }

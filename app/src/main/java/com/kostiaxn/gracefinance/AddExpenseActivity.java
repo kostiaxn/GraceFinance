@@ -103,6 +103,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                     currentId = 1L;
                     idRef.setValue(currentId);
                 }
+                String date = datePickerButton.getText().toString().trim();
                 String accountName = etAccountName.getText().toString().trim();
                 String cardName = etCardName.getText().toString().trim();
                 double amount = Double.parseDouble(etAmount.getText().toString().trim());
@@ -116,7 +117,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
 
                 // Create a new expense object with the current ID
-                Expense expense = new Expense(Math.toIntExact(currentId), accountName, cardName, amount, place, comment, currency,
+                Expense expense = new Expense(Math.toIntExact(currentId),date, accountName, cardName, amount, place, comment, currency,
                         exchangeRate, productCategory, productSubCategory, productName);
 
                 // Save the expense object to Firebase
