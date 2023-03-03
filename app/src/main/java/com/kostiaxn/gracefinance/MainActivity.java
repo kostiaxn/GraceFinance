@@ -1,5 +1,6 @@
 package com.kostiaxn.gracefinance;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,31 +22,27 @@ public class MainActivity extends AppCompatActivity {
     TextView tvCurrentBalanceAmount;
     FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        currentBalance();
         btnAddExpense = findViewById(R.id.btnAddExpense);
         btnAddIncome = findViewById(R.id.btnAddIncome);
         btnLogOut = findViewById(R.id.btnLogout);
         mAuth = FirebaseAuth.getInstance();
         tvCurrentBalanceAmount = findViewById(R.id.tvCurrentBalanceAmount);
-        currentBalance();
+
+
 
 
         btnLogOut.setOnClickListener(view -> {
             mAuth.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
-        btnAddExpense.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, AddExpenseActivity.class));
-        });
-        btnAddIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddIncomeActivity.class));
-            }
-        });
+        btnAddExpense.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddExpenseActivity.class)));
+        btnAddIncome.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddIncomeActivity.class)));
     }
 
 

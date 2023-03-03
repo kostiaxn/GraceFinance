@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class ChangeBalanceFragment extends DialogFragment {
-    TextView tvCurrentBalanceAmount;
+
 
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class ChangeBalanceFragment extends DialogFragment {
                         double newBalance = Double.parseDouble(newBalanceString); // convert string value to double
                         balanceUpdater.balance = newBalance; // set the new balance value
                         balanceUpdater.setBalance(); // call the method
-                        ((MainActivity) getActivity()).tvCurrentBalanceAmount.setText(String.valueOf(newBalance)); //update MainActivity
+                        ((MainActivity) requireActivity()).tvCurrentBalanceAmount.setText(String.valueOf(newBalance)); //update MainActivity
                     }
                 })
                 .setNegativeButton("Отмена", null)

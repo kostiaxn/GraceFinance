@@ -124,8 +124,7 @@ public class AddIncomeActivity extends AppCompatActivity {
                 long newId = currentId + 1;
                 idRef.setValue(newId);
 
-                Toast.makeText(AddIncomeActivity.this,"Новое поступление добавлено",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AddIncomeActivity.this, MainActivity.class));
+
 
                 // Update the user's balance in Firebase
                 DatabaseReference balanceRef = database.getReference("users/" + userId + "/balance");
@@ -147,11 +146,13 @@ public class AddIncomeActivity extends AppCompatActivity {
                         // Save the new balance to Firebase
                         balanceRef.setValue(newBalance);
 
+                        Toast.makeText(AddIncomeActivity.this,"Новое поступление добавлено",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(AddIncomeActivity.this, MainActivity.class));
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.w("AddExpenseActivity", "Failed to read balance value.", error.toException());
+                        Log.w("AddIncomeActivity", "Failed to read balance value.", error.toException());
                     }
                 });
 
@@ -159,7 +160,7 @@ public class AddIncomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("AddExpenseActivity", "Failed to read current_id value.", error.toException());
+                Log.w("AddIncomeActivity", "Failed to read current_id value.", error.toException());
             }
         });
 

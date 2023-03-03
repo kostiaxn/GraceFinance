@@ -3,6 +3,7 @@ package com.kostiaxn.gracefinance;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -126,8 +127,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 long newId = currentId + 1;
                 idRef.setValue(newId);
 
-                Toast.makeText(AddExpenseActivity.this,"Новый расход записан",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(AddExpenseActivity.this, MainActivity.class));
+
 
                 // Update the user's balance in Firebase
                 DatabaseReference balanceRef = database.getReference("users/" + userId + "/balance");
@@ -148,6 +148,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                         // Save the new balance to Firebase
                         balanceRef.setValue(newBalance);
 
+                        Toast.makeText(AddExpenseActivity.this,"Новый расход записан",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(AddExpenseActivity.this, MainActivity.class));
                     }
 
                     @Override
