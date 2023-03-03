@@ -32,7 +32,7 @@ public class ChangeBalanceFragment extends DialogFragment {
                         double newBalance = Double.parseDouble(newBalanceString); // convert string value to double
                         balanceUpdater.balance = newBalance; // set the new balance value
                         balanceUpdater.setBalance(); // call the method
-                        ((MainActivity) getActivity()).tvCurrentBalanceAmount.setText(String.valueOf(newBalance));
+                        ((MainActivity) getActivity()).tvCurrentBalanceAmount.setText(String.valueOf(newBalance)); //update MainActivity
                     }
                 })
                 .setNegativeButton("Отмена", null)
